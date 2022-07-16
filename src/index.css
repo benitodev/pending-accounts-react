@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+  background-color: #ededed6b;
+}
+
+@layer components {
+  .app {
+    @apply min-h-screen  text-center shadow-sm 
+  }
+
+  .create-account {
+    @apply min-h-screen px-2 font-fira-sans
+  }
+  .home {
+    @apply min-h-screen px-2  font-fira-sans
+  }
+  .navbar{
+    @apply  fixed top-0 flex justify-center w-full
+  }
+  .nav{
+    @apply bg-nav border-gray-200 px-2 sm:px-4 py-3 mb-5 rounded dark:bg-gray-800 
+  }
+
+  .text-logo{
+    @apply flex items-center text-size-logo
+  }
+
+  .nav-menu{
+    @apply relative
+  }
+  .nav-pages{
+    @apply  md:flex md:justify-center md:items-center md:ml-6 md:order-1
+  }
+
+  .nav-user-logo{
+    @apply hidden justify-between items-center w-full md:flex md:w-auto md:order-2
+  }
+
+}
