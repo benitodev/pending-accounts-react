@@ -15,7 +15,7 @@ const client = new ApolloClient({
     headers:{
       authorization: token ? "bearer ".concat(token) : null 
     },
-    uri: "http://localhost:4000/graphql",
+    uri: "https://pending-accounts.herokuapp.com/graphql",
   }),
 })
 

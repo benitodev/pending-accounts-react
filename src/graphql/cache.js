@@ -17,7 +17,7 @@ export const cache = new InMemoryCache({
   },
 });
 
-export const isLoggedInVar = makeVar(
+export const isLogged = makeVar(
   !!JSON.parse(localStorage.getItem("pendingAccountsApp"))?.value
 );
 

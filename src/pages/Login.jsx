@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
-import {gql, useMutation} from "@apollo/client"
+import { useNavigate } from 'react-router-dom'
+
+import {useMutation} from "@apollo/client"
 import {LOGIN} from "../graphql/mutations"
+import { isLogged } from '../graphql/cache'
+
 import Form from '../components/form/Form'
 import Notification from '../components/message/Notification'
 import useReset from '../hooks/useReset'
-import { useNavigate } from 'react-router-dom'
-import { isLoggedInVar } from '../graphql/cache'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -16,7 +18,7 @@ const Login = () => {
   
       localStorage.setItem("pendingAccountsApp", JSON.stringify({value: data.login.value, userLogged: data.login.userLogged}))
 
-      isLoggedInVar(true)
+      isLogged(true)
       setTimeout(()=>{
         navigate("/")
       }, 4500)

@@ -1,12 +1,12 @@
 import React from 'react'
-import {useQuery} from "@apollo/client"
-import UserLogic from '../components/users/UserLogic'
 import { Link } from 'react-router-dom'
 import {BiLoaderCircle} from "react-icons/bi"
+
+import {useQuery} from "@apollo/client"
 import { ALL_USERS } from '../graphql/queries'
+
 import LogoutButton from '../components/button/LogoutButton'
-
-
+import UserLogic from '../components/users/UserLogic'
 
 const Home = () => {
     const result = useQuery(ALL_USERS)

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+//disable the other checkbox when we click one
+
 const useCheckboxDisabled = (setCheckbox) => {
   const checkboxRef1 = useRef();
   const checkboxRef2 = useRef();

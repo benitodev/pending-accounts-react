@@ -19,10 +19,10 @@ export const ALL_USERS = gql`
 `;
 
 export const FIND_USER = gql`
-  query {
-    getUser {
+  query getUser($id: String) {
+    getUser(id: $id) {
+      username
       id
-      name
     }
   }
 `;
@@ -36,6 +36,18 @@ export const FIND_ACCOUNT = gql`
         id
         howOwes
         amount
+        createdAt
+      }
+    }
+  }
+`;
+
+export const FIND_DATA_TO_DELETE_ACCOUNT = gql`
+  query findToDeleteAccount($userSelected: String!) {
+    findAccount(userSelected: $userSelected) {
+      id
+      bills {
+        id
       }
     }
   }

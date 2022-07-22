@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 
-const Button = ({color = "black", text, disabled}) => {
+const Button = ({color = "black", text, disabled = true}) => {
   const type = {
     black:{
         textColor: "text-white",
@@ -15,6 +15,13 @@ const Button = ({color = "black", text, disabled}) => {
     bgColor: "bg-purple-700",
     hoverBgColor: "hover:bg-purple-800",
     darkMode: ["dark:hover:bg-purple-700", "dark:bg-purple-600", "dark:focus:ring-purple-900", "dark:border-gray-700"],
+    more: ["focus:outline-none", "focus:ring-purple-300"]
+    },
+    red:{
+    textColor: "text-white",
+    bgColor: "bg-red-700",
+    hoverBgColor: "hover:bg-red-800",
+    darkMode: ["dark:hover:bg-red-700", "dark:bg-red-600", "dark:focus:ring-red-900", "dark:border-red-700"],
     more: ["focus:outline-none", "focus:ring-purple-300"]
     }
   }

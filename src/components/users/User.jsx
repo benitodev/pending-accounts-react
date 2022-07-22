@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Button from '../button/Button'
+
+import {useReactiveVar } from '@apollo/client'
+import { isLogged } from '../../graphql/cache'
+
 import FormToCreateAccount from '../form/FormToCreateAccount'
+import Button from '../button/Button'
 import Modal from '../modal/Modal'
-import {useMutation, useReactiveVar } from '@apollo/client'
-import { isLoggedInVar } from '../../graphql/cache'
-import { CREATE_ACCOUNT } from '../../graphql/mutations'
+
 const User = ({user}) => {
-  const [accountMutation, {data, loading, error}] = useMutation(CREATE_ACCOUNT)
   const [isModal, setIsModal] = useState(false);
-  const bool = useReactiveVar(isLoggedInVar) 
+  //check if the current user is logged to create and view other users
+  const bool = useReactiveVar(isLogged) 
 
   return (
     <div className='flex justify-between'>
@@ -25,8 +27,8 @@ const User = ({user}) => {
     </article>
 
     {isModal && 
-      <Modal setModal={setIsModal}>
-       <FormToCreateAccount user={user} setModal={setIsModal} accountData={data} createAccountMutation={accountMutation}/>
+      <Modal setmodal={setIsModal}>
+       <FormToCreateAccount user={user} setmodal={setIsModal}/>
       </Modal>}
     </section>
     </div>

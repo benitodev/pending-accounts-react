@@ -1,22 +1,23 @@
-import React, { useState } from 'react'
-import Checkbox from './Checkbox'
-import { useEffect } from 'react'
-import { CREATE_BILL } from '../../graphql/mutations'
+import React, { useEffect } from 'react'
+
+import { CREATE_ACCOUNT, CREATE_BILL } from '../../graphql/mutations'
 import { useMutation } from '@apollo/client'
 
+import Checkbox from './Checkbox'
+import useForm from '../../hooks/useForm'
 
-const FormToCreateAccount = ({user, setModal, accountData, createAccountMutation}) => {
-  const [billMutation, result] = useMutation(CREATE_BILL)
-  const [subject, setSubject] = useState("");
-  const [checkbox, setCheckbox] = useState("");
-  const [money, setMoney] = useState(0);
-  const [comments, setComments] = useState("");
 
+const FormToCreateAccount = ({user, setmodal}) => {
+ 
+  const [createAccount, {data:accountData}] = useMutation(CREATE_ACCOUNT)
+  const [createBill, result] = useMutation(CREATE_BILL)
+
+  const {subject, money, comments, checkbox, setSubject, setMoney, setComments, setCheckbox} = useForm()
 
   const handleClick = () => {
-    createAccountMutation({variables:{name: subject, chosenUser: user.id}})
+    createAccount({variables:{name: subject, chosenUser: user.id}})
     setTimeout(()=>{
-      setModal(false)
+      setmodal(false)
     }, 2000)
   }
 
@@ -24,7 +25,7 @@ const FormToCreateAccount = ({user, setModal, accountData, createAccountMutation
   useEffect(()=>{
     if(!accountData) return
     const account = accountData.createAccount.id
-    billMutation({variables: {amount: money, account, howOwes: checkbox}})
+    createBill({variables: {amount: money, account, howOwes: checkbox}})
   }, [accountData])
 
   return (
@@ -37,8 +38,8 @@ const FormToCreateAccount = ({user, setModal, accountData, createAccountMutation
         </div>
         <Checkbox setCheckbox={setCheckbox} username={user.username}/>
         <div>
-            <label htmlFor="how-much" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">how much?</label>
-            <input onChange={({target})=> setMoney(parseInt(target.value))} type="text" name="how-much" placeholder="ex: 450$" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required=""/>
+            <label htmlFor="money" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">how much?</label>
+            <input onChange={({target})=> setMoney(parseInt(target.value))} type="text" name="money" placeholder="ex: 450$" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required=""/>
         </div>
         <div >
         <label htmlFor="how-much" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Add comments</label>
